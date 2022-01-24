@@ -55,4 +55,12 @@ public class Coordonnees {
         this.longitude = longitude;
     }
     
+    @Override
+    public String toString() {
+        return "Coordinates{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
+    
 }

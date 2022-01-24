@@ -38,6 +38,11 @@ public class Step {
     public void setLengthStep(int lengthStep) {
         this.lengthStep = lengthStep;
     }
+
+    @Override
+    public String toString() {
+        return "Step{" + "addressStep=" + addressStep + ", lengthStep=" + lengthStep + '}';
+    }
     
     
     

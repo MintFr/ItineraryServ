@@ -183,6 +183,7 @@ public class Itinerary {
             
             this.pointsItinerary.add(new Coordonnees(lonEnd, latEnd));
             //System.out.println(stepsLength);
+            System.out.println(this.details);
 
             this.cleanDetails();
 
@@ -467,6 +468,31 @@ public class Itinerary {
      */
     public void setStep(ArrayList<Double> step) {
         this.step = step;
+    }
+    
+    
+    @Override
+    public String toString() {
+        String response = "";
+        response += "Itinerary : \n";
+        response += "Hour of start : " + this.HofStart + "\n";
+        response += "time : " + this.time + "\n";
+        response += "distance : " + this.getDistance() + "\n";
+        response += "duration : " + this.getDuration() + "\n";
+        response += "exposition : " + this.getExposition() + "\n";
+        response += "transport : " + this.transport + "\n";
+        response += "Details :  \n";
+        for (int i =0; i < this.details.size(); i++){
+        response += "\t " + this.getDetails().get(i).toString() + "\n";
+                }
+        response += "End details } \n";
+        response += "Points itinerary :  \n";
+        for (int i =0; i < this.pointsItinerary.size(); i++){
+        response += "\t " +  this.getPointsItinerary().get(i).toString() + "\n";
+                }
+        response += "End points } \n";
+        response += "hasStep : " + hasStep + "\n step : " + step + "\n }";
+        return response;
     }
     
     
