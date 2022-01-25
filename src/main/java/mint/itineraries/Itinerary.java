@@ -151,7 +151,11 @@ public class Itinerary {
             //System.out.println(itinerary.getString("name"));
             if(itinerary.getString("name")!=null){
                 this.details.add(new Step(itinerary.getString("name"), (int)itinerary.getDouble("length")));
-            }            
+            }
+            else {
+                this.details.add(new Step("", (int)itinerary.getDouble("length")));
+            }
+            
             double[] firstEdge = new double[] {itinerary.getDouble("x1"), itinerary.getDouble("y1"), 
                                                itinerary.getDouble("x2"), itinerary.getDouble("y2")};
             itinerary.next();
@@ -161,6 +165,9 @@ public class Itinerary {
             
             if(itinerary.getString("name")!=null){
                 this.details.add(new Step(itinerary.getString("name"), (int)itinerary.getDouble("length")));
+            }
+            else {
+                this.details.add(new Step("", (int)itinerary.getDouble("length")));
             }
             
             
@@ -175,7 +182,11 @@ public class Itinerary {
                 //this.stepsLength.add((int)Math.round(itinerary.getDouble("length")));
                 if(itinerary.getString("name")!=null){
                 this.details.add(new Step(itinerary.getString("name"), (int)itinerary.getDouble("length")));
-            }                addNode(itinerary.getDouble("x1"), itinerary.getDouble("y1"), itinerary.getDouble("x2"), itinerary.getDouble("y2"));
+            }
+                else {
+                    this.details.add(new Step("", (int)itinerary.getDouble("length")));
+            }
+                addNode(itinerary.getDouble("x1"), itinerary.getDouble("y1"), itinerary.getDouble("x2"), itinerary.getDouble("y2"));
                 this.geomsItinerary.add(itinerary.getString("the_geom"));
             }
 

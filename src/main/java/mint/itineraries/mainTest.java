@@ -10,10 +10,10 @@ package mint.itineraries;
  * @author mathis
  */
 public class mainTest {
-    static double lonStart =  -1.569431;
-    static double lonEnd = -1.562239;
-    static double latStart = 47.250334;
-    static double latEnd = 47.235706;
+    static double lonStart =  -1.586;
+    static double lonEnd = -1.598;
+    static double latStart = 47.219;
+    static double latEnd = 47.278;
     static Itinerary itinerary1;
     
 
@@ -21,7 +21,7 @@ public class mainTest {
     public static void main(String[] args){
         itinerary1 = new Itinerary();
         
-        itinerary1.getItinerary(1, -1.569431, 47.250334, -1.562239, 47.235706, 0);
+        itinerary1.getItinerary(1, -1.586, 47.219, -1.598, 47.278, 0);
         
         System.out.println(itinerary1);
         
