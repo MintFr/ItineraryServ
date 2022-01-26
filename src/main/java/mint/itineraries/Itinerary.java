@@ -319,16 +319,18 @@ public class Itinerary {
         newDetails.add(new Step(tempAddress, tempLength,nbPoint));
         this.setDetails(newDetails);
     }
-    
+    /**
+     * method that fuses steps when 2 steps of the same name are separed by one unnamed one
+     */
         public void cleanUnnamedDetails(){
         //First we create an array of integer that will contain the index of the step that it has to be fused with
-        int[] indiceTofuse = new int[this.getDetails().size()];
+        int[] indexTofuse = new int[this.getDetails().size()];
         for(int k=0;k< this.getDetails().size() - 1; k++){
-            indiceTofuse[k]=k;
+            indexTofuse[k]=k;
         }
         int j=1;
         
-
+        //We have an array of indexes that will correspond to the index the step should have when fused
         while ( j < this.getDetails().size() - 1) {
 
             String tempAddress = this.getDetails().get(j).getAddressStep();
@@ -340,31 +342,32 @@ public class Itinerary {
                     )
                 )
             {
-             indiceTofuse[j]=indiceTofuse[j-1];
-             indiceTofuse[j+1]=indiceTofuse[j-1];
+             indexTofuse[j]=indexTofuse[j-1];
+             indexTofuse[j+1]=indexTofuse[j-1];
              j++;
             }
             else{
-                indiceTofuse[j]=indiceTofuse[j-1]+1;
+                indexTofuse[j]=indexTofuse[j-1]+1;
             }
             j++;
         }
         
    
-        
+        //We create newDetails to update the details in the itinerary
         ArrayList<Step> newDetails = new ArrayList<>();
         newDetails.add(new Step(this.getDetails().get(0).getAddressStep(), this.getDetails().get(0).getLengthStep()));
-        //Now that we have the array of indexes to fuse we actually do it
+        //We check the index in the array index to fuse and we add a new one if not fused with the precedent one and if needed to be fused we do it
         for (int i=1;i<this.getDetails().size();i++){
-            if (indiceTofuse[i]!=indiceTofuse[i-1]){
+            if (indexTofuse[i]!=indexTofuse[i-1]){
             newDetails.add(new Step(this.getDetails().get(i).getAddressStep(), this.getDetails().get(i).getLengthStep(),this.getDetails().get(i).getNumberOfPoints()));
             }
             else{
-            newDetails.set(indiceTofuse[i],new Step(newDetails.get(indiceTofuse[i]).getAddressStep()
-                    ,newDetails.get(indiceTofuse[i]).getLengthStep()+ this.getDetails().get(i).getLengthStep()
-                    ,newDetails.get(indiceTofuse[i]).getNumberOfPoints()+ this.getDetails().get(i).getNumberOfPoints()));
+            newDetails.set(indexTofuse[i],new Step(newDetails.get(indexTofuse[i]).getAddressStep()
+                    ,newDetails.get(indexTofuse[i]).getLengthStep()+ this.getDetails().get(i).getLengthStep()
+                    ,newDetails.get(indexTofuse[i]).getNumberOfPoints()+ this.getDetails().get(i).getNumberOfPoints()));
             }
         }
+        //we set the new details in the itinerary
         this.setDetails(newDetails);
     }
     /**
