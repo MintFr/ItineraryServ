@@ -12,15 +12,23 @@ package mint.itineraries;
 public class Step {
     private String addressStep;
     private int lengthStep;
+    private int numberOfPoints;
 
+    public Step(String addressStep, int lengthStep,int numberOfPoints) {
+        this.addressStep = addressStep;
+        this.lengthStep = lengthStep;
+        this.numberOfPoints = numberOfPoints;
+    }
     public Step(String addressStep, int lengthStep) {
         this.addressStep = addressStep;
         this.lengthStep = lengthStep;
+        this.numberOfPoints = 1;
     }
 
     public Step() {
         this.addressStep = new String();
         this.lengthStep = 0;
+        this.numberOfPoints = 0;
     }
 
     public String getAddressStep() {
@@ -38,13 +46,15 @@ public class Step {
     public void setLengthStep(int lengthStep) {
         this.lengthStep = lengthStep;
     }
+    public int getNumberOfPoints() {
+        return numberOfPoints;
+    }
 
+    public void setNumberOfPoints(int numberOfPoints) {
+        this.numberOfPoints = numberOfPoints;
+    }
     @Override
     public String toString() {
-        return "Step{" + "addressStep=" + addressStep + ", lengthStep=" + lengthStep + '}';
-    }
-    
-    
-    
-    
+        return "{" + "addressStep: " + addressStep + ", lengthStep: " + lengthStep +",numberOfPoints: "+numberOfPoints+ '}';
+    }   
 }

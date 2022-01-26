@@ -21,7 +21,7 @@ public class mainTest {
     public static void main(String[] args){
         itinerary1 = new Itinerary();
         
-        itinerary1.getItinerary(1, -1.586, 47.219, -1.598, 47.278, 0);
+        itinerary1.getItinerary(3,   -1.5495565, 47.248338399999994, -1.5543263999999999, 47.212046, 2);
         
         System.out.println(itinerary1);
         

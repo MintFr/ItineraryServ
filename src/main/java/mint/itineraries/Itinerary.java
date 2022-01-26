@@ -197,6 +197,7 @@ public class Itinerary {
             System.out.println(this.details);
 
             this.cleanDetails();
+            this.cleanUnnamedDetails();
 
         } catch (SQLException ex) {    
             Logger.getLogger(Itinerary.class.getName()).log(Level.SEVERE, null, ex);
@@ -299,21 +300,73 @@ public class Itinerary {
         ArrayList<Step> newDetails = new ArrayList<>();
         String tempAddress = this.getDetails().get(0).getAddressStep();
         int tempLength = this.getDetails().get(0).getLengthStep();
+        int nbPoint = 1;
         for(int j = 1; j<this.getDetails().size();j++){
             if(this.getDetails().get(j).getAddressStep().equals(tempAddress)){
                 //System.out.println(true);
                 tempLength += this.getDetails().get(j).getLengthStep();
+                nbPoint+=1;
             }
             else{
                 //System.out.println(false);
-                newDetails.add(new Step(tempAddress, tempLength));
+                newDetails.add(new Step(tempAddress, tempLength,nbPoint));
                 tempAddress = this.getDetails().get(j).getAddressStep();
                 tempLength = this.getDetails().get(j).getLengthStep();
+                nbPoint=1;
+                
+            }
+        }
+        newDetails.add(new Step(tempAddress, tempLength,nbPoint));
+        this.setDetails(newDetails);
+    }
+    
+        public void cleanUnnamedDetails(){
+        //First we create an array of integer that will contain the index of the step that it has to be fused with
+        int[] indiceTofuse = new int[this.getDetails().size()];
+        for(int k=0;k< this.getDetails().size() - 1; k++){
+            indiceTofuse[k]=k;
+        }
+        int j=1;
+        
+
+        while ( j < this.getDetails().size() - 1) {
+
+            String tempAddress = this.getDetails().get(j).getAddressStep();
+            if (
+                    tempAddress.equals("") & 
+                    (this.getDetails().get(j-1).getAddressStep().equals(
+                            this.getDetails().get(j+1).getAddressStep()
+                        )
+                    )
+                )
+            {
+             indiceTofuse[j]=indiceTofuse[j-1];
+             indiceTofuse[j+1]=indiceTofuse[j-1];
+             j++;
+            }
+            else{
+                indiceTofuse[j]=indiceTofuse[j-1]+1;
+            }
+            j++;
+        }
+        
+   
+        
+        ArrayList<Step> newDetails = new ArrayList<>();
+        newDetails.add(new Step(this.getDetails().get(0).getAddressStep(), this.getDetails().get(0).getLengthStep()));
+        //Now that we have the array of indexes to fuse we actually do it
+        for (int i=1;i<this.getDetails().size();i++){
+            if (indiceTofuse[i]!=indiceTofuse[i-1]){
+            newDetails.add(new Step(this.getDetails().get(i).getAddressStep(), this.getDetails().get(i).getLengthStep(),this.getDetails().get(i).getNumberOfPoints()));
+            }
+            else{
+            newDetails.set(indiceTofuse[i],new Step(newDetails.get(indiceTofuse[i]).getAddressStep()
+                    ,newDetails.get(indiceTofuse[i]).getLengthStep()+ this.getDetails().get(i).getLengthStep()
+                    ,newDetails.get(indiceTofuse[i]).getNumberOfPoints()+ this.getDetails().get(i).getNumberOfPoints()));
             }
         }
         this.setDetails(newDetails);
     }
-    
     /**
      * Connect two itineraries 
      * @param itinerary2 
@@ -504,17 +557,5 @@ public class Itinerary {
         response += "End points } \n";
         response += "hasStep : " + hasStep + "\n step : " + step + "\n }";
         return response;
-    }
-    
-    
-    
-    
-
-
-    
-    
-    
-    
-    
-    
+    }  
 }
