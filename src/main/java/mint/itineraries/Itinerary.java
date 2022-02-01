@@ -359,12 +359,12 @@ public class Itinerary {
         //We check the index in the array index to fuse and we add a new one if not fused with the precedent one and if needed to be fused we do it
         for (int i=1;i<this.getDetails().size();i++){
             if (indexTofuse[i]!=indexTofuse[i-1]){
-            newDetails.add(new Step(this.getDetails().get(i).getAddressStep(), this.getDetails().get(i).getLengthStep(),this.getDetails().get(i).getNumberOfPoints()));
+            newDetails.add(new Step(this.getDetails().get(i).getAddressStep(), this.getDetails().get(i).getLengthStep(),this.getDetails().get(i).getNumberOfEdges()));
             }
             else{
             newDetails.set(indexTofuse[i],new Step(newDetails.get(indexTofuse[i]).getAddressStep()
                     ,newDetails.get(indexTofuse[i]).getLengthStep()+ this.getDetails().get(i).getLengthStep()
-                    ,newDetails.get(indexTofuse[i]).getNumberOfPoints()+ this.getDetails().get(i).getNumberOfPoints()));
+                    ,newDetails.get(indexTofuse[i]).getNumberOfEdges()+ this.getDetails().get(i).getNumberOfEdges()));
             }
         }
         //we set the new details in the itinerary

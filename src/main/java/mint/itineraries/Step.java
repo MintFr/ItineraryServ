@@ -12,23 +12,23 @@ package mint.itineraries;
 public class Step {
     private String addressStep;
     private int lengthStep;
-    private int numberOfPoints;
+    private int numberOfEdges; // number of edges that compose the step (for real time itinerary purpose)
 
-    public Step(String addressStep, int lengthStep,int numberOfPoints) {
+    public Step(String addressStep, int lengthStep,int numberOfEdges) {
         this.addressStep = addressStep;
         this.lengthStep = lengthStep;
-        this.numberOfPoints = numberOfPoints;
+        this.numberOfEdges = numberOfEdges; 
     }
     public Step(String addressStep, int lengthStep) {
         this.addressStep = addressStep;
         this.lengthStep = lengthStep;
-        this.numberOfPoints = 1;
+        this.numberOfEdges = 1;
     }
 
     public Step() {
         this.addressStep = new String();
         this.lengthStep = 0;
-        this.numberOfPoints = 0;
+        this.numberOfEdges = 0;
     }
 
     public String getAddressStep() {
@@ -46,15 +46,15 @@ public class Step {
     public void setLengthStep(int lengthStep) {
         this.lengthStep = lengthStep;
     }
-    public int getNumberOfPoints() {
-        return numberOfPoints;
+    public int getNumberOfEdges() {
+        return numberOfEdges;
     }
 
-    public void setNumberOfPoints(int numberOfPoints) {
-        this.numberOfPoints = numberOfPoints;
+    public void setNumberOfEdges(int numberOfEdges) {
+        this.numberOfEdges = numberOfEdges;
     }
     @Override
     public String toString() {
-        return "{" + "addressStep: " + addressStep + ", lengthStep: " + lengthStep +",numberOfPoints: "+numberOfPoints+ '}';
+        return "{" + "addressStep: " + addressStep + ", lengthStep: " + lengthStep +",numberOfEdges: "+numberOfEdges+ '}';
     }   
 }
