@@ -148,7 +148,6 @@ public class Itinerary {
             incrExposition(itinerary.getDouble("c"));
             incrDistanceAndDuration(transportation, itinerary.getDouble("length"), itinerary.getDouble("speed"));
             //this.stepsLength.add((int)Math.round(itinerary.getDouble("length")));
-            //System.out.println(itinerary.getString("name"));
             if(itinerary.getString("name")!=null){
                 this.details.add(new Step(itinerary.getString("name"), (int)itinerary.getDouble("length")));
             }
@@ -161,7 +160,6 @@ public class Itinerary {
             itinerary.next();
             incrExposition(itinerary.getDouble("c"));
             incrDistanceAndDuration(transportation, itinerary.getDouble("length"), itinerary.getDouble("speed"));
-            //this.stepsLength.add((int)Math.round(itinerary.getDouble("length")));
             
             if(itinerary.getString("name")!=null){
                 this.details.add(new Step(itinerary.getString("name"), (int)itinerary.getDouble("length")));
@@ -179,7 +177,6 @@ public class Itinerary {
             while (itinerary.next()) {
                 incrExposition(itinerary.getDouble("c"));
                 incrDistanceAndDuration(transportation, itinerary.getDouble("length"), itinerary.getDouble("speed"));
-                //this.stepsLength.add((int)Math.round(itinerary.getDouble("length")));
                 if(itinerary.getString("name")!=null){
                 this.details.add(new Step(itinerary.getString("name"), (int)itinerary.getDouble("length")));
             }
@@ -189,12 +186,8 @@ public class Itinerary {
                 addNode(itinerary.getDouble("x1"), itinerary.getDouble("y1"), itinerary.getDouble("x2"), itinerary.getDouble("y2"));
                 this.geomsItinerary.add(itinerary.getString("the_geom"));
             }
-
-            //this.pointsItinerary.add(new Coordonnees(latEnd, lonEnd));
             
             this.pointsItinerary.add(new Coordonnees(lonEnd, latEnd));
-            //System.out.println(stepsLength);
-            System.out.println(this.details);
 
             this.cleanDetails();
             this.cleanUnnamedDetails();

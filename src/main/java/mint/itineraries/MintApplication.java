@@ -245,7 +245,7 @@ public class MintApplication {
                 double random = Math.random() * 100;
                 //itineraryFast.setExposition(random);
                 itineraryFast.setHofStart(hourStart);
-                itineraryHealth.setExposition(random);
+                // itineraryHealth.setExposition(random);
                 itineraryHealth.setHofStart(hourStart);
                 //itinerary.setTime(time);
                 if (j != 0) {
@@ -277,10 +277,10 @@ public class MintApplication {
             for (int j : transportation) {
                 Itinerary itinerary1Fast = new Itinerary();
                 double random = Math.random() * 100;
-                itinerary1Fast.setExposition(random);
+                // itinerary1Fast.setExposition(random);
                 itinerary1Fast.setHofStart(hourStart);
                 Itinerary itinerary1Health = new Itinerary();
-                itinerary1Health.setExposition(random);
+                // itinerary1Health.setExposition(random);
                 itinerary1Health.setHofStart(hourStart);
                 //itinerary1.setTime(time);
                 if (j != 0) {
