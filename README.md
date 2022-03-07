@@ -17,3 +17,9 @@ You have to build the project with maven, to create a target folder, where a war
 
 ### 2) Deploy it on Tomcat
 To do it, you have to go to the manager home of your Tomcat server. Then, you can either drop your war file (currently named `itineraries-pollution.war`) and deploy it, or enter information manually with the name you want to call it, the URL etc...
+
+### 3) Use it 
+After deploying it, you can directly use it through your navigator by typing 
+```
+http://ServerName:8080/ProjectName/serviceName?param1=arg1&param2=arg2& etc...
+```
