@@ -182,7 +182,7 @@ public class Itinerary {
             this.geomsItinerary = new ArrayList<>();
             this.details = new ArrayList<>();
 
-            this.details.add(new Step("Rejoignez : ", (int)distStart, 1));
+            this.details.add(new Step("Rejoignez : ", 16, 1));
 
             // treatment of the first two edges
             itinerary.next();
@@ -230,7 +230,7 @@ public class Itinerary {
             this.cleanDetails();
             this.cleanUnnamedDetails();
 
-            this.details.add(new Step("Vous arrivez : ", (int)distEnd, 1));
+            this.details.add(new Step("Vous arrivez : ", 16, 1));
 
         } catch (SQLException ex) {
             Logger.getLogger(Itinerary.class.getName()).log(Level.SEVERE, null, ex);
@@ -350,8 +350,8 @@ public class Itinerary {
                 nbPoint = 1;
 
             }
-        }
-        newDetails.add(new Step(tempAddress, tempLength, nbPoint));
+        } 
+       newDetails.add(new Step(tempAddress, tempLength, nbPoint));
         this.setDetails(newDetails);
     }
 
