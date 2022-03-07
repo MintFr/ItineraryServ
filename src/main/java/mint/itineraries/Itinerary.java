@@ -11,9 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Classe de calcul d'itinéraire
+ * Itinerary calculation class
  *
- * @author Mathieu Rey-Herme & Emmanuel Bocquillon
  */
 public class Itinerary {
 
@@ -24,7 +23,6 @@ public class Itinerary {
     private double duration; // seconds
     private double exposition;
     private String transport;
-    //private ArrayList<Integer> stepsLength;
     private ArrayList<Coordonnees> pointsItinerary;
     private ArrayList<String> geomsItinerary;
     private boolean hasStep;
@@ -127,7 +125,7 @@ public class Itinerary {
 
         }
         // get way id for start and end
-        int wayStart = getIDQuery(co.getConnect(), lonStart, latStart); //recupère les indices des aretes qui correspondent aux coordonnées
+        int wayStart = getIDQuery(co.getConnect(), lonStart, latStart); //get edge indexes corresponding to coordinates
         int wayEnd = getIDQuery(co.getConnect(), lonEnd, latEnd);
         
         double distStart = getDistanceToPoint(co.getConnect(), lonStart, latStart);
@@ -173,7 +171,6 @@ public class Itinerary {
             // get itinerary attributes
             this.HofStart = true;
             this.time = "00:00";
-            //this.stepsLength = new ArrayList<>();
             this.distance = 0;
             this.duration = 0;
             this.exposition = 0;
@@ -189,7 +186,6 @@ public class Itinerary {
             System.out.println(itinerary.getDouble("c"));
             incrExposition(itinerary.getDouble("c"));
             incrDistanceAndDuration(transportation, itinerary.getDouble("length"), itinerary.getDouble("speed"));
-            //this.stepsLength.add((int)Math.round(itinerary.getDouble("length")));
             if (itinerary.getString("name") != null) {
                 this.details.add(new Step(itinerary.getString("name"), (int) itinerary.getDouble("length")));
             } else {
@@ -339,11 +335,9 @@ public class Itinerary {
         int nbPoint = 1;
         for (int j = 1; j < this.getDetails().size(); j++) {
             if (this.getDetails().get(j).getAddressStep().equals(tempAddress)) {
-                //System.out.println(true);
                 tempLength += this.getDetails().get(j).getLengthStep();
                 nbPoint += 1;
             } else {
-                //System.out.println(false);
                 newDetails.add(new Step(tempAddress, tempLength, nbPoint));
                 tempAddress = this.getDetails().get(j).getAddressStep();
                 tempLength = this.getDetails().get(j).getLengthStep();
@@ -488,13 +482,6 @@ public class Itinerary {
         this.transport = transport;
     }
 
-//    public ArrayList<Integer> getStepsLength() {
-//        return stepsLength;
-//    }
-//
-//    public void setStepsLength(ArrayList<Integer> stepsLength) {
-//        this.stepsLength = stepsLength;
-//    }
     /**
      * Set if there is a an start hour defined
      *
@@ -510,7 +497,6 @@ public class Itinerary {
      * @param time
      */
     public void setTime(String time) {
-        //System.out.println(time);
         this.time = time;
     }
 

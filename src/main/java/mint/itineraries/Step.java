@@ -7,7 +7,6 @@ package mint.itineraries;
 
 /**
  *
- * @author Kheira
  */
 public class Step {
     private String addressStep;

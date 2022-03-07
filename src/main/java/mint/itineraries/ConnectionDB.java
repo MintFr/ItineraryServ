@@ -14,9 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Classe de connexion aux bases de données
+ * Database connection class
  *
- * @author Mathieu Rey-Herme & Emmanuel Bocquillon
  */
 public final class ConnectionDB {
 
