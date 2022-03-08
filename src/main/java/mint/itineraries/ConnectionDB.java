@@ -5,114 +5,103 @@
  */
 package mint.itineraries;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * Classe de connexion aux bases de données
- * @author Mathieu Rey-Herme & Emmanuel Bocquillon
+ * Database connection class
+ *
  */
 public final class ConnectionDB {
+
     private Connection connect;
-    
+
     /**
      * Connect to database containing datas of the chosen mean of transportation
-     * @param transportation 
+     *
+     * @param transportation
      */
-    public ConnectionDB(int transportation){
+    public ConnectionDB(int transportation) {
         this.connectToDB(transportation);
     }
-    
+
     /**
      * Constructor without parameters
      */
     public ConnectionDB() {
     }
-    
+
     /**
      * Connect to database depending on the requested mean of transportation
-     * @param transportation 
+     *
+     * @param transportation
      */
-    public void connectToDB(int transportation){
+    public void connectToDB(int transportation) {
         try {
             Class.forName("org.postgresql.Driver");
-            ResourceBundle parameters = ResourceBundle.getBundle("credentials");
-            String user = getResourceElement(parameters, "user");
-            String pwd = getResourceElement(parameters, "pwd");
-            String address = getResourceElement(parameters, "address");
-            
-            String lien;
-            //System.out.println(transportation);
-            //System.out.println(transportation==0);
-            switch (transportation){
-                case 3 :
-                    lien = address + "routing_pedestrian";
+
+            Properties config = new Properties();
+            config.load(this.getClass().getResourceAsStream("/credentials.properties"));
+
+            var username = config.getProperty("user");
+            var password = config.getProperty("pwd");
+            var address = config.getProperty("address");
+            var port = config.getProperty("port");
+
+            String link = "jdbc:postgresql://";
+
+            switch (transportation) {
+                case 3:
+                    link += address + ":" + port + "/" + "routing_pedestrian";
                     //System.out.println("case0");
                     break;
-                case 2 :
-                    lien = address + "routing_bicycles";
+                case 2:
+                    link += address + ":" + port + "/" + "routing_bicycles";
                     //System.out.println("case1");
                     break;
-                case 0 : 
-                    lien = address + "routing_cars";
+                case 0:
+                    link += address + ":" + port + "/" + "routing_cars";
                     //System.out.println("casedefault");
                     break;
-                default :
-                    lien = address + "routing_cars";
+                default:
+                    link += address + ":" + port + "/" + "routing_cars";
                     //System.out.println("casedefault");
                     break;
 
             };
-            //System.out.println(lien);
-            
-            this.connect = DriverManager.getConnection(lien, user, pwd);
-            
-        }catch(java.lang.ClassNotFoundException e) {
-            System.err.println("ClassNotFoundException : " + e.getMessage()) ;
+            //System.out.println(link);
+
+            this.connect = DriverManager.getConnection(link, username, password);
+
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.println("ClassNotFoundException : " + e.getMessage());
+        } catch (SQLException ex) {
+            System.err.println("SQLException : " + ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch(SQLException ex) {
-            System.err.println("SQLException : " + ex.getMessage()) ;
-        }
+
     }
-    
+
     /**
      * Close database connection
      */
     public void closeConnection() {
         try {
             this.connect.close();
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println("SQLException : " + ex.getMessage());
         }
     }
-    
-    /**
-     * 
-     * @param res
-     * @param element
-     * @return 
-     */
-    private String getResourceElement(ResourceBundle res, String element) {
-        String newValue;
-        String returnValue = "";
-        if (res != null) {
-            try {
-                newValue = res.getString(element);
-                if (!newValue.equals("")) {
-                    returnValue = newValue;
-                }
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
-        }
-        return returnValue;
-    }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public Connection getConnect() {
         return connect;
