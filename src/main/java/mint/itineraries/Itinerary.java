@@ -59,19 +59,20 @@ public class Itinerary {
             return -1;
         }
     }
-    
+
     /**
      * Method that calculate the distance between a real point, and the clother
      * points in the database. Used for the first and last step of itinerary.
+     *
      * @param connect
      * @param lon
      * @param lat
-     * @return 
+     * @return
      */
     public double getDistanceToPoint(Connection connect, double lon, double lat) {
         ResultSet res;
-        String query = 
-                "SELECT 1000*ST_Distance("
+        String query
+                = "SELECT 1000*ST_Distance("
                 + "ST_SetSRID(ST_Point (?, ?), 4326),"
                 + " dist.the_geom) as distance"
                 + " FROM ("
@@ -81,7 +82,7 @@ public class Itinerary {
         try ( PreparedStatement stmt = connect.prepareStatement(query)) {
             stmt.setDouble(1, lon);
             stmt.setDouble(2, lat);
-            
+
             stmt.setDouble(3, lon);
             stmt.setDouble(4, lat);
             res = stmt.executeQuery();
@@ -127,7 +128,7 @@ public class Itinerary {
         // get way id for start and end
         int wayStart = getIDQuery(co.getConnect(), lonStart, latStart); //get edge indexes corresponding to coordinates
         int wayEnd = getIDQuery(co.getConnect(), lonEnd, latEnd);
-        
+
         double distStart = getDistanceToPoint(co.getConnect(), lonStart, latStart);
         double distEnd = getDistanceToPoint(co.getConnect(), lonEnd, latEnd);
 
@@ -344,8 +345,8 @@ public class Itinerary {
                 nbPoint = 1;
 
             }
-        } 
-       newDetails.add(new Step(tempAddress, tempLength, nbPoint));
+        }
+        newDetails.add(new Step(tempAddress, tempLength, nbPoint));
         this.setDetails(newDetails);
     }
 
@@ -387,8 +388,8 @@ public class Itinerary {
                 newDetails.add(new Step(this.getDetails().get(i).getAddressStep(), this.getDetails().get(i).getLengthStep(), this.getDetails().get(i).getNumberOfEdges()));
             } else {
                 newDetails.set(indexTofuse[i], new Step(newDetails.get(indexTofuse[i]).getAddressStep(),
-                         newDetails.get(indexTofuse[i]).getLengthStep() + this.getDetails().get(i).getLengthStep(),
-                         newDetails.get(indexTofuse[i]).getNumberOfEdges() + this.getDetails().get(i).getNumberOfEdges()));
+                        newDetails.get(indexTofuse[i]).getLengthStep() + this.getDetails().get(i).getLengthStep(),
+                        newDetails.get(indexTofuse[i]).getNumberOfEdges() + this.getDetails().get(i).getNumberOfEdges()));
             }
         }
         //we set the new details in the itinerary

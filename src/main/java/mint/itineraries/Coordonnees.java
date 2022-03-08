@@ -7,16 +7,19 @@ package mint.itineraries;
 
 /**
  * Class representing spatial coordinates, in latitude and longitude
+ *
  * @author Kheira
  */
 public class Coordonnees {
+
     private Double latitude;
     private Double longitude;
 
     /**
      * Constructor
+     *
      * @param longitude
-     * @param latitude 
+     * @param latitude
      */
     public Coordonnees(Double longitude, Double latitude) {
         this.latitude = latitude;
@@ -25,7 +28,8 @@ public class Coordonnees {
 
     /**
      * Get latitude
-     * @return 
+     *
+     * @return
      */
     public Double getLatitude() {
         return latitude;
@@ -33,7 +37,8 @@ public class Coordonnees {
 
     /**
      * Set latitude
-     * @param latitude 
+     *
+     * @param latitude
      */
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
@@ -41,7 +46,8 @@ public class Coordonnees {
 
     /**
      * Get longitude
-     * @return 
+     *
+     * @return
      */
     public Double getLongitude() {
         return longitude;
@@ -49,18 +55,19 @@ public class Coordonnees {
 
     /**
      * Set longitude
-     * @param longitude 
+     *
+     * @param longitude
      */
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
-    
+
     @Override
     public String toString() {
-        return "Coordinates{" +
-                "latitude=" + latitude +
-                ", longitude=" + longitude +
-                '}';
+        return "Coordinates{"
+                + "latitude=" + latitude
+                + ", longitude=" + longitude
+                + '}';
     }
-    
+
 }

@@ -9,15 +9,17 @@ package mint.itineraries;
  *
  */
 public class Step {
+
     private String addressStep;
     private int lengthStep;
     private int numberOfEdges; // number of edges that compose the step (for real time itinerary purpose)
 
-    public Step(String addressStep, int lengthStep,int numberOfEdges) {
+    public Step(String addressStep, int lengthStep, int numberOfEdges) {
         this.addressStep = addressStep;
         this.lengthStep = lengthStep;
-        this.numberOfEdges = numberOfEdges; 
+        this.numberOfEdges = numberOfEdges;
     }
+
     public Step(String addressStep, int lengthStep) {
         this.addressStep = addressStep;
         this.lengthStep = lengthStep;
@@ -45,6 +47,7 @@ public class Step {
     public void setLengthStep(int lengthStep) {
         this.lengthStep = lengthStep;
     }
+
     public int getNumberOfEdges() {
         return numberOfEdges;
     }
@@ -52,8 +55,9 @@ public class Step {
     public void setNumberOfEdges(int numberOfEdges) {
         this.numberOfEdges = numberOfEdges;
     }
+
     @Override
     public String toString() {
-        return "{" + "addressStep: " + addressStep + ", lengthStep: " + lengthStep +",numberOfEdges: "+numberOfEdges+ '}';
-    }   
+        return "{" + "addressStep: " + addressStep + ", lengthStep: " + lengthStep + ",numberOfEdges: " + numberOfEdges + '}';
+    }
 }
